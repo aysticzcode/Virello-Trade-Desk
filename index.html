@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virello Trade Desk | Nigeria's #1 Investment Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div id="landing" class="page active">
+        <nav class="navbar">
+            <div class="logo">Virello</div>
+            <button class="btn-auth" onclick="nav('login')">Login</button>
+        </nav>
+
+        <header class="hero">
+            <h1>Financial Freedom <br><span class="highlight">Starts Here.</span></h1>
+            <p>Join over 50,000+ active investors earning daily. Secure, fast, and transparent.</p>
+            <div class="hero-btns">
+                <button class="btn-main" onclick="nav('signup')">Get Started Now</button>
+            </div>
+        </header>
+
+        <section class="stats-bar">
+            <div class="stat"><strong>50k+</strong><p>Users</p></div>
+            <div class="stat"><strong>₦250M+</strong><p>Paid Out</p></div>
+            <div class="stat"><strong>24/7</strong><p>Support</p></div>
+        </section>
+
+        <section class="features-grid">
+            <div class="feat-card"><i class="fa-solid fa-bolt"></i><h3>Instant Start</h3><p>Invest and start your 15h timer immediately.</p></div>
+            <div class="feat-card"><i class="fa-solid fa-lock"></i><h3>Bank Grade Security</h3><p>Your data and funds are encrypted and safe.</p></div>
+            <div class="feat-card"><i class="fa-solid fa-money-bill-transfer"></i><h3>Easy Payout</h3><p>Cash out directly to your local bank account.</p></div>
+        </section>
+
+        <section class="live-payouts">
+            <h3>Recent Cash-outs 🟢</h3>
+            <div id="payout-scroller" class="scroller">
+                </div>
+        </section>
+
+        <footer class="landing-footer">
+            <p>&copy; 2026 Virello Trade Desk. Licensed & Secured.</p>
+        </footer>
+    </div>
+
+    <div id="signup" class="page">
+        <div class="auth-container">
+            <h2>Create Account</h2>
+            <input type="text" id="reg-name" placeholder="Full Name">
+            <input type="email" id="reg-email" placeholder="Email Address">
+            <input type="password" id="reg-pass" placeholder="Password (Min 6 chars)">
+            <button class="btn-main" onclick="handleSignUp()">Create Account</button>
+            <p class="toggle-text" onclick="nav('login')">Already have an account? <span>Login</span></p>
+        </div>
+    </div>
+
+    <div id="login" class="page">
+        <div class="auth-container">
+            <h2>Welcome Back</h2>
+            <input type="email" id="log-email" placeholder="Email Address">
+            <input type="password" id="log-pass" placeholder="Password">
+            <button class="btn-main" onclick="handleLogin()">Login</button>
+            <p class="toggle-text" onclick="nav('signup')">New user? <span>Sign Up</span></p>
+        </div>
+    </div>
+
+    <div id="dashboard" class="page">
+        <div class="dash-top">
+            <div class="balance-card">
+                <p>Available Balance</p>
+                <h1 id="balance">₦0.00</h1>
+                <div class="card-actions">
+                    <button onclick="openDeposit()"><i class="fa-solid fa-plus"></i> Deposit</button>
+                    <button class="btn-alt" onclick="alert('Withdrawal portal opens every Friday.')">Withdraw</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="plans-section">
+            <h3>Investment Tiers</h3>
+            <div class="plans-grid">
+                <div class="plan starter"><div><h4>Starter</h4><p>₦4,000 → ₦4,800</p></div><button onclick="invest(4000, 4800)">Invest</button></div>
+                <div class="plan silver"><div><h4>Silver</h4><p>₦7,000 → ₦9,100</p></div><button onclick="invest(7000, 9100)">Invest</button></div>
+                <div class="plan gold"><div><h4>Gold</h4><p>₦10,000 → ₦13,500</p></div><button onclick="invest(10000, 13500)">Invest</button></div>
+                <div class="plan diamond"><div><h4>Diamond</h4><p>₦25,000 → ₦35,000</p></div><button onclick="invest(25000, 35000)">Invest</button></div>
+                <div class="plan platinum"><div><h4>Platinum</h4><p>₦50,000 → ₦75,000</p></div><button onclick="invest(50000, 75000)">Invest</button></div>
+                <div class="plan ultimate"><div><h4>Ultimate</h4><p>₦100,000 → ₦160,000</p></div><button onclick="invest(100000, 160000)">Invest</button></div>
+            </div>
+        </div>
+
+        <div class="active-trades-section">
+            <h3>Active Trades (15h Timer)</h3>
+            <div id="trades-container">
+                <p class="empty-msg">No active investments yet.</p>
+            </div>
+        </div>
+
+        <nav class="bottom-nav">
+            <div onclick="nav('dashboard')" class="nav-item active-nav"><i class="fa-solid fa-house"></i><small>Home</small></div>
+            <div onclick="alert('Referral: Link Copied!')" class="nav-item"><i class="fa-solid fa-users"></i><small>Invite</small></div>
+            <div onclick="location.reload()" class="nav-item"><i class="fa-solid fa-power-off"></i><small>Exit</small></div>
+        </nav>
+    </div>
+
+    <div id="deposit-modal" class="modal">
+        <div class="modal-content">
+            <h3>Manual Transfer</h3>
+            <div class="bank-box">
+                <p>Bank: <strong id="bank-name">---</strong></p>
+                <p>Acc No: <strong id="bank-acc">---</strong></p>
+                <p>Name: <strong id="bank-user">---</strong></p>
+            </div>
+            <input type="number" id="dep-amount" placeholder="Amount (Min ₦4,000)">
+            <input type="text" id="dep-sender" placeholder="Sender Name">
+            <button class="btn-main" onclick="submitDeposit()">Submit Proof</button>
+            <button class="btn-alt" style="color:red; border-color: red;" onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
